@@ -31,7 +31,7 @@ const React4 = (props) =>{
             <div  className="container m-0">
                 <div>
                     <h1 className={logado ? "text-success" : "text-danger"}>{img.Texto}</h1>
-                    <img src={img.Imagem} width="50%" alt="Imagem"/>
+                    <img src={img.Imagem} width="30%" alt="Imagem"/>
                 </div>
                 <button 
                 className={logado ? "btn btn-success" : "btn btn-danger"}
