@@ -1,0 +1,11 @@
+{
+  "name": "exercicio_aula5",
+  "version": "1.0.0",
+  "description": "Exercicio_aula5",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Marcelo Barbosa",
+  "license": "ISC"
+}
