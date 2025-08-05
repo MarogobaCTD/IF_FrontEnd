@@ -1,19 +1,21 @@
-//import type { atividades } from "../dados/atividades";
-
-// 1. Modelo de dados do produto (o que um produto realmente é)
-export interface CulturaCardDados {
+// 1. Definindo a Interface de Props com TypeScript
+export interface CulturaCardData {
+    id: number;
     nome: string;
     descricao: string;
     previsao: string;
     imageUrl: string;
     emExecucao?: boolean; //Opcional
 }
-// 2. Props do componente (o que o componente recebe)
-interface CulturaCardProps {
-    atividade: CulturaCardDados; 
-}
-// 3. Componente agora recebe 'id' via props (embora não usado visualmente ainda)
-function CulturaCard({atividade}:CulturaCardProps){
+
+// 2. Componente usando tipagem TypeScript direta
+interface  CulturaCardProps
+{
+    atividade: CulturaCardData;
+} 
+
+function CulturaCard({ atividade }: CulturaCardProps)
+{
     return (
         <div className="col-lg-4 mb-4">
             {/* Card com estilo uniforme para todos os produtos */}
