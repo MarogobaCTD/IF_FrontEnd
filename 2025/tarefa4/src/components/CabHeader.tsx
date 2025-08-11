@@ -17,7 +17,7 @@ function CabHeader(props: CabHeaderProps){
    const [isUserLoggedIn, setIsUserLoggedIn] = useState(false);
    
    useEffect(() =>{        
-      console.log("mudou o login", isUserLoggedIn);
+      console.log("Como está o login CabHeader", isUserLoggedIn);
     }, [isUserLoggedIn]);
 
     return(
@@ -66,7 +66,17 @@ function CabHeader(props: CabHeaderProps){
                     }}                    
                   />
               </props.Modal>
-              <MensagemTcc isUserLoggedIn={isUserLoggedIn} />     
+              <MensagemTcc 
+                    isUserLoggedIn={isUserLoggedIn}
+                    onLoginOk={(status) => {
+                      if (status) {
+                        console.log("Login confirmado!");                        
+                      } else {
+                        console.log("Falha no login.");                        
+                      }
+                      setIsUserLoggedIn(status);
+                    }} 
+                    Modal={props.Modal}/>     
             </header>
     )
 }

@@ -1,12 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react';
+import LoginForm from "./LoginForm";
 
 interface MensagemTcc{
-  isUserLoggedIn: boolean
+  isUserLoggedIn: boolean;
+  onLoginOk: (status: boolean) => void;
+  Modal: React.ComponentType<{
+      isOpen: boolean;
+      onClose: () => void;
+      titulo: string;
+      children: React.ReactNode;    
+    }>;
 }
 
-function MensagemTcc({isUserLoggedIn}: MensagemTcc) {
+function MensagemTcc({isUserLoggedIn, onLoginOk, Modal}: MensagemTcc) {
 
-  const [mensagem, setMensagem] = useState<string>('');
+  const [mensagem, setMensagem] = useState<string>('');  
+  const [isModalVisible, setIsModalVisible] = useState<boolean>(false); 
 
   function calcularDiasRestantes(dataEntrega: string): number {
     const hoje = new Date();
@@ -32,6 +41,10 @@ function MensagemTcc({isUserLoggedIn}: MensagemTcc) {
     }
   }, []); 
 
+  useEffect(() =>{        
+        console.log("Como está o login no MensagemTcc", isUserLoggedIn);
+  }, [isUserLoggedIn]);
+
   return (
      <section>
        { !isUserLoggedIn && (
@@ -49,8 +62,22 @@ function MensagemTcc({isUserLoggedIn}: MensagemTcc) {
                 </div>
             ) : (
                 <div className="alert alert-warning" role="alert">
-                    Usuário não está logado. <a href="#" className="alert-link">Faça login</a> para continuar.
-                </div>
+                    Usuário não está logado. <a href="#" className="alert-link" onClick={() => setIsModalVisible(true)}>Faça login</a> para continuar.
+                
+                    <Modal isOpen={isModalVisible} onClose={() => setIsModalVisible(false)} titulo={'Acessar o sistema'}>
+                        <LoginForm
+                            onClose={() => setIsModalVisible(false)}
+                            onLoginOk={(status) => {
+                            if (status) {
+                              console.log("Login confirmado!");                        
+                            } else {
+                              console.log("Falha no login.");                        
+                            }                            
+                            onLoginOk(status);
+                          }}                    
+                        />
+                    </Modal>
+                  </div>
             )}
         </div>   
      </section>   
